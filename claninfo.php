@@ -6,6 +6,7 @@ import("utils.Logger");
 $res = array();
 try {
 	header("Content-type: application/json");
+	header("Access-Control-Allow-Origin: *");
 	echo ClashAPI::getClanInfo(MY_CLAN);
 	exit();
 } //end try
@@ -19,5 +20,6 @@ catch(Exception $e) {
 } //end catch
 
 header("Content-type: application/json");
+header("Access-Control-Allow-Origin: *");
 echo json_encode($res);
 ?>
