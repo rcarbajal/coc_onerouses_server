@@ -5,14 +5,14 @@ import("utils.Logger");
 
 $res = array();
 try {
-	$content =  json_decode(ClashAPI::getClanInfo(MY_CLAN));
+	$content =  json_decode(ClashAPI::getCurrentWar(MY_CLAN));
 	$res = array(
 		"responseCode" => 200,
 		"content" => $content
 	);
 } //end try
 catch(Exception $e) {
-	Logger::write(Logger::ERROR, "Error retrieving clan information.", $e);
+	Logger::write(Logger::ERROR, "Error retrieving current war information.", $e);
 	Logger::write(Logger::DEBUG, $e->getTraceAsString());
 	$res = array(
 		"responseCode" => 500,

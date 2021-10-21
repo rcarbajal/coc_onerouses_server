@@ -5,17 +5,17 @@ import("utils.Logger");
 
 $res = array();
 try {
-	$content =  json_decode(ClashAPI::getClanInfo(MY_CLAN));
+	$content =  json_decode(ClashAPI::getCurrentLeagueGroup(MY_CLAN));
 	$res = array(
 		"responseCode" => 200,
 		"content" => $content
 	);
 } //end try
 catch(Exception $e) {
-	Logger::write(Logger::ERROR, "Error retrieving clan information.", $e);
+	Logger::write(Logger::ERROR, "Error retrieving league group information.", $e);
 	Logger::write(Logger::DEBUG, $e->getTraceAsString());
 	$res = array(
-		"responseCode" => 500,
+		"responseCode" => 503,
 		"errorMessage" => $e->getMessage()
 	);
 } //end catch

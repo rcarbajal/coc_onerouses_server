@@ -2,17 +2,27 @@
 include("includes/constants.php");
 import("api.ClashAPI");
 import("utils.Logger");
+import("utils.Utils");
 
 $res = array();
+$playerTag = isset($_GET['player']) ? Utils::sanitizeInput($_GET['player']) : "";
+
 try {
-	$content =  json_decode(ClashAPI::getClanInfo(MY_CLAN));
-	$res = array(
-		"responseCode" => 200,
-		"content" => $content
-	);
+	if ($playerTag != "") {
+		$content = json_decode(ClashAPI::getPlayerInfo($playerTag));
+		$res = array(
+			"responseCode" => 200,
+			"content" => $content
+		);
+	} //end if
+	else
+		$res = array(
+			"responseCode" => 400,
+			"errorMessage" => "No player specified"
+		);
 } //end try
 catch(Exception $e) {
-	Logger::write(Logger::ERROR, "Error retrieving clan information.", $e);
+	Logger::write(Logger::ERROR, "Error retrieving player information.", $e);
 	Logger::write(Logger::DEBUG, $e->getTraceAsString());
 	$res = array(
 		"responseCode" => 500,

@@ -38,7 +38,6 @@ function import($libString = "") {
 		if(file_exists($filePath))
 			require_once($filePath);
 	} //end if
-	
 	return;
 } //end function import()
 
